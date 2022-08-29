@@ -1,14 +1,12 @@
 package com.futurewei.myanim.ui.component.topic
 
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,16 +23,13 @@ import com.futurewei.myanim.R
  * @param expanded Whether the row should be shown expanded with the topic body.
  * @param onClick Called when the row is clicked.
  */
-@ExperimentalMaterialApi
+@OptIn(  ExperimentalMaterialApi::class)
+//@Surface
 @Composable
 fun TopicRow(topic: String, expanded: Boolean, onClick: () -> Unit) {
     TopicRowSpacer(visible = expanded)
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = 2.dp,
-        onClick = onClick
-    ) {
-        // TODO 3: Animate the size change of the content.
+
+    Surface(modifier = Modifier.fillMaxWidth(), elevation = 2.dp, onClick = onClick) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

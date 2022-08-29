@@ -22,7 +22,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringArrayResource
@@ -41,7 +44,6 @@ import com.futurewei.myanim.ui.theme.Green300
 import com.futurewei.myanim.ui.theme.Purple100
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun Home(){
@@ -88,9 +90,6 @@ fun Home(){
 //    }
 
     val lazyListState = rememberLazyListState()
-
-    // The background color. The value is changed by the current tab.
-    // TODO 1: Animate this color change.
     val backgroundColor by animateColorAsState(if(tabPage == TabPage.Home) Purple100 else Green300)
     val coroutineScope = rememberCoroutineScope()
 

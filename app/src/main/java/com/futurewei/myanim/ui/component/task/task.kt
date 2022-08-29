@@ -75,7 +75,7 @@ fun TaskRow(task: String, onRemove: () -> Unit) {
  * @param onDismissed Called when the element is swiped to the edge of the screen.
  */
 private fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = composed {
-    // TODO 6-1: Create an Animatable instance for the offset of the swiped element.
+
     val offsetX = remember { Animatable(0f) }
 
     pointerInput(Unit) {
@@ -86,7 +86,7 @@ private fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = compose
             while (true) {
                 // Wait for a touch down event.
                 val pointerId = awaitPointerEventScope { awaitFirstDown().id }
-                // TODO 6-2: Touch detected; the animation should be stopped.
+
                 // got touch event stop current animation
                 offsetX.stop()
                 // Prepare for drag events and record velocity of a fling.
@@ -94,7 +94,7 @@ private fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = compose
                 // Wait for drag events.
                 awaitPointerEventScope {
                     horizontalDrag(pointerId) { change ->
-                        // TODO 6-3: Apply the drag change to the Animatable offset.
+
                         // get drag amount with the change together
                         val horizontalDragOffset = offsetX.value + change.positionChange().x
                         launch {
@@ -109,18 +109,12 @@ private fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = compose
                 }
                 // Dragging finished. Calculate the velocity of the fling.
                 val velocity = velocityTracker.calculateVelocity().x
-                // TODO 6-4: Calculate the eventual position where the fling should settle
-                //           based on the current offset value and velocity
                 val targetOffsetX = decay.calculateTargetValue(offsetX.value,velocity)
-                // TODO 6-5: Set the upper and lower bounds so that the animation stops when it
-                //           reaches the edge.
                 offsetX.updateBounds(
                     lowerBound = -size.width.toFloat(),
                     upperBound = size.width.toFloat()
                 )
                 launch {
-                    // TODO 6-6: Slide back the element if the settling position does not go beyond
-                    //           the size of the element. Remove the element if it does.
                     if(targetOffsetX.absoluteValue <= size.width){
                         offsetX.animateTo(targetValue = 0f, initialVelocity = velocity)
                     }else{
@@ -132,7 +126,6 @@ private fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = compose
         }
     }
     .offset {
-        // TODO 6-7: Use the animating offset value here.
         IntOffset( offsetX.value.roundToInt(), 0)
     }
 }
