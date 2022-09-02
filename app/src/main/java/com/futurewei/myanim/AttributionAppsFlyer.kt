@@ -6,13 +6,9 @@ import com.appsflyer.AFInAppEventType
 import com.appsflyer.AppsFlyerLib
 
 
-class AttributionAppsFlyer {
+class AttributionAppsFlyer(ctx:Context){
 
-    private var context: Context? = null
-
-    fun createAttributionAppsFlyer(ctx: Context) {
-        return AttributionAppsFlyer(this, ctx)
-    }
+     var context: Context? = ctx
 
     fun TrackEvent() {
 
@@ -40,9 +36,8 @@ class AttributionAppsFlyer {
     }
 
     companion object {
-        private fun AttributionAppsFlyer(
-            attributionAppsFlyer: AttributionAppsFlyer, ctx: Context) {
-            attributionAppsFlyer.context = ctx
-        }
+
+        fun createAttributionAppsFlyer(ctx:Context): AttributionAppsFlyer = AttributionAppsFlyer(ctx)
+
     }
 }

@@ -1,21 +1,18 @@
 package com.futurewei.myanim
 
 import android.app.Application
-import android.content.Context
+
 import android.content.res.Resources
 import android.util.Log
-//import androidx  .multidex.MultiDexApplication
+
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
-//import com.hmsecosystem.calculator.AttributionAppsFlyer.createAttributionAppsFlyer
 
-
-//class App : MultiDexApplication() {
-    class App(): Application() {
+class App: Application() {
     override fun onCreate() {
         super.onCreate()
         appResources = resources
-        val AF_DEV_KEY = appResources!!.getString(AF_DEV_KEY)
+        val devKey = "AF_DEV_KEY"
 
 
 //        set single Dashboard third party store name here:
@@ -24,8 +21,9 @@ import com.appsflyer.AppsFlyerLib
 //        Cohort dashboard
 //        Raw data reports (Raw data reports are an AppsFlyer premium feature)
         AppsFlyerLib.getInstance().setOutOfStore("AG_Connect")
-        val attr: AttributionAppsFlyer = createAttributionAppsFlyer(this)
+        val attr: AttributionAppsFlyer = AttributionAppsFlyer.createAttributionAppsFlyer(this)
         attr.TrackEvent()
+
         val conversionListener: AppsFlyerConversionListener = object : AppsFlyerConversionListener {
             override fun onConversionDataSuccess(conversionData: Map<String, Any>) {
                 for (attrName in conversionData.keys) {
@@ -53,14 +51,16 @@ import com.appsflyer.AppsFlyerLib
             }
         }
 
-        /* This API enables AppsFlyer to detect installations, sessions, and updates. */AppsFlyerLib.getInstance()
+        /* This API enables AppsFlyer to detect installations, sessions, and updates. */
+        AppsFlyerLib.getInstance()
             .init(
-                AF_DEV_KEY,
+                devKey,
                 conversionListener,
-                ApplicationProvider.getApplicationContext<Context>()
+                applicationContext
             )
         AppsFlyerLib.getInstance().start(this)
     }
+
 
     companion object {
         var appResources: Resources? = null
