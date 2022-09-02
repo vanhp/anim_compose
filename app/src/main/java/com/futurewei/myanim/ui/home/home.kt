@@ -55,7 +55,7 @@ fun Home(){
     var tabPage by remember { mutableStateOf(TabPage.Home) }
 
     // True if the whether data is currently loading.
-//    var weatherLoading by remember { mutableStateOf(false) }
+    //  var weatherLoading by remember { mutableStateOf(false) }
 
     // Holds all the tasks currently shown on the task list.
     val tasks = remember { mutableStateListOf(*allTasks) }
@@ -119,7 +119,7 @@ fun Home(){
             modifier = Modifier.padding(padding)
         ) {
             // Weather
-            item { Header(title = stringResource(R.string.weather)) }
+//            item { Header(title = stringResource(R.string.weather)) }
             item { Spacer(modifier = Modifier.height(16.dp)) }
             item {
                 Surface(
